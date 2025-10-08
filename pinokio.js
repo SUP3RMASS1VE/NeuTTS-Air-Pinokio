@@ -1,6 +1,6 @@
 module.exports = {
   version: "3.7",
-  title: "NeuTTS-Air-TTS",
+  title: "NeuTTS-Air",
   description: "NeuTTS Air is the world’s first super-realistic, on-device, TTS speech language model with instant voice cloning. Built off a 0.5B",
   icon: "icon.PNG",
   menu: async (kernel, info) => {
@@ -86,3 +86,4 @@ module.exports = {
     }
   }
 }
+
