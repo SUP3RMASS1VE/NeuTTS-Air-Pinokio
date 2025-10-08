@@ -15,31 +15,37 @@
       }
     },
     {
-      "when": "{{platform === 'win32' && which('winget')}}",
+      "when": "{{which('brew')}}",
+      "method": "shell.run",
+      "params": {
+        "message": "brew install espeak-ng"
+      },
+      "next": "end"
+    },
+    {
+      "when": "{{which('apt')}}",
       "method": "shell.run",
       "params": {
         "sudo": true,
-        "message": [
-          "winget install --id=eSpeak-NG.eSpeak-NG -e --silent --accept-source-agreements --accept-package-agreements"
-        ]
-      }
+        "message": "apt install libaio-dev espeak-ng"
+      },
+      "next": "end"
     },
     {
-      "when": "{{platform === 'darwin'}}",
+      "when": "{{which('yum')}}",
       "method": "shell.run",
       "params": {
-        "message": [
-          "brew install espeak-ng"
-        ]
-      }
+        "sudo": true,
+        "message": "yum install libaio-devel espeak-ng"
+      },
+      "next": "end"
     },
     {
-      "when": "{{platform === 'linux'}}",
+      "when": "{{which('winget')}}",
       "method": "shell.run",
       "params": {
-        "message": [
-          "sudo apt-get install -y espeak-ng"
-        ]
+        "sudo": true,
+        "message": "winget install --id=eSpeak-NG.eSpeak-NG -e --silent --accept-source-agreements --accept-package-agreements"
       }
     },
     {
