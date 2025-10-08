@@ -1,0 +1,79 @@
+{
+  "run": [
+    {
+      "method": "shell.run",
+      "params": {
+        "message": [
+          "git clone https://github.com/SUP3RMASS1VE/NeuTTS-Air-TTS app"
+        ]
+      }
+    },
+    {
+      "method": "notify",
+      "params": {
+        "html": "Installing espeak-ng (required for TTS)..."
+      }
+    },
+    {
+      "when": "{{platform === 'win32' && which('winget')}}",
+      "method": "shell.run",
+      "params": {
+        "sudo": true,
+        "message": [
+          "winget install --id=eSpeak-NG.eSpeak-NG -e --silent --accept-source-agreements --accept-package-agreements"
+        ]
+      }
+    },
+    {
+      "when": "{{platform === 'darwin'}}",
+      "method": "shell.run",
+      "params": {
+        "message": [
+          "brew install espeak-ng"
+        ]
+      }
+    },
+    {
+      "when": "{{platform === 'linux'}}",
+      "method": "shell.run",
+      "params": {
+        "message": [
+          "sudo apt-get install -y espeak-ng"
+        ]
+      }
+    },
+    {
+      "method": "script.start",
+      "params": {
+        "uri": "torch.js",
+        "params": {
+          "path": "app",
+          "venv": "venv",
+          "xformers": false,
+          "triton": false,
+          "sageattention": false
+        }
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "venv": "venv",
+        "path": "app",
+        "chain": true,
+        "input": null,
+        "message": [
+          "uv pip install -r requirements.txt"
+        ]
+      }
+    },
+    {
+      "id": "end",
+      "method": "input",
+      "params": {
+        "title": "Install Complete!!",
+        "description": "Install Complete."
+      }
+    }
+  ]
+}
